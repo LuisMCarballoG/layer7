@@ -13,7 +13,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form method="POST" action="{{ route('products.update', $product->id) }}">
                         @csrf
-                        @method('PATCH')
+                        @method('PUT')
                         <div class="w-3/4 mx-auto">
                             <div class="mb-4">
                                 <x-input-label for="name" :value="__('Nombre')" />

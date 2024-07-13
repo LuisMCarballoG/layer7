@@ -27,10 +27,12 @@ Route::middleware('auth')->group(function () {
         Route::get('', 'index')->name('index');
         Route::get('create', 'create')->name('create');
         Route::post('', 'store')->name('store');
-        Route::get('{product}', 'show')->name('show');
-        Route::get('{product}/edit', 'edit')->name('edit');
-        Route::patch('{product}', 'update')->name('update');
-        Route::delete('{product}', 'destroy')->name('destroy');
+        Route::prefix('{product}')->group(function () {
+            Route::get('', 'show')->name('show');
+            Route::get('edit', 'edit')->name('edit');
+            Route::put('', 'update')->name('update');
+            Route::delete('', 'destroy')->name('destroy');
+        });
     });
 });
 
