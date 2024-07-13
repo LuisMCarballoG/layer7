@@ -8,14 +8,29 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                @if (session('success'))
+                    <div x-data="{ show: true }"
+                         x-show="show"
+                         x-transition:leave="transition ease-in duration-300"
+                         x-transition:leave-start="opacity-100"
+                         x-transition:leave-end="opacity-0"
+                         class="flex justify-between bg-emerald-600 dark:bg-emerald-800 border-l-4 border-emerald-400 dark:border-emerald-300 p-4 mb-4 rounded-r-lg shadow-md"
+                         role="alert">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-white dark:text-emerald-100 font-medium">{{ session('success') }}</span>
+                        </div>
+                        <button type="button" @click="show = false" class="end-0 right-0 px-4 py-3 text-red-500 hover:text-white focus:outline-none">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                @endif
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="flex justify-between mb-4">
-                        @if (session('success'))
-                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                                <span class="block sm:inline">{{ session('success') }}</span>
-                            </div>
-                        @endif
-
                         <form action="{{ route('products.index') }}" method="GET" class="flex">
                             <input type="text" name="search" placeholder="Buscar productos..." value="{{ $search }}" class="rounded-l-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-300">
                             <button type="submit" class="bg-blue-500 text-white rounded-r-md px-4 py-2">Buscar</button>
